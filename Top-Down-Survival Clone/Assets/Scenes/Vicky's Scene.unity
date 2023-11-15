@@ -1480,7 +1480,7 @@ GameObject:
   - component: {fileID: 1454936680}
   - component: {fileID: 1454936679}
   m_Layer: 5
-  m_Name: Game Over Panel (1)
+  m_Name: You Win Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
