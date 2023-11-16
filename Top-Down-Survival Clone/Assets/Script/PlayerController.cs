@@ -9,9 +9,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Designation for the player model to allow the player to blink upon taking damage.
+    public GameObject Body;
 
     //The speed at which the player will move.
     public float speed = 5f;
+
+    //The amount of health the player currently has at any point.
+    public int health;
+    //The amount of health the player can have maximum at any point.
+    public int healthLimit;
+
+    //The amount of coins the player has gained.
+    public int coins;
 
     //location where the player respawns to
     private Vector3 startPos;
@@ -27,6 +37,9 @@ public class PlayerController : MonoBehaviour
     private bool movingRight;
     //Designation for moving back
     private bool movingBack;
+
+    //Designation for Invulnerability to help the player survive close encounters
+    private bool invuln = false;
 
     // Start is called before the first frame update
     void Start()
@@ -61,5 +74,76 @@ public class PlayerController : MonoBehaviour
             //translate the player right by speed using time.deltatime
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
+    }
+
+    /// <summary>
+    /// The script that runs everything related to player damage; Invuln, blink, and check if health hits zero.
+    /// </summary>
+    private void Damage()
+    {
+        StartCoroutine(InvulnTimer());
+        StartCoroutine(Blink());
+        
+
+    }
+    
+    /// <summary>
+    /// Section of the script that runs collision; damage with enemies, picking up coins, etc.
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        //If we collide with an enemy, take damage.
+        if (other.gameObject.tag == "Enemy" && invuln == false)
+        {
+            health -= 1;
+            Damage();
+        }
+        //If we collide with a difficulty 2 enemy, take more damage.
+        if (other.gameObject.tag == "EnemyLvl2" && invuln == false)
+        {
+            health -= 2;
+            Damage();
+        }
+        //If we collide with a difficulty 3 enemy, take even more damage.
+        if (other.gameObject.tag == "EnemyLvl3" && invuln == false)
+        {
+            health -= 3;
+            Damage();
+        }
+        //If we collide with a coin, pickup coin.
+        if (other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+            coins += 1;
+        }
+    }
+
+
+    //Enumerator for invulnerability, dictates whether or not the player will take damage when making contact.
+    IEnumerator InvulnTimer()
+    {
+        //Set the invuln bool to true
+        invuln = true;
+        yield return new WaitForSeconds(0.5f);
+        //Set invulnerability bool to false
+        invuln = false;
+    }
+    //Ienumerator for the blinking of the player; allows the player to know when they take damage.
+    IEnumerator Blink()
+    {
+        for (int index = 0; index < 2; index++)
+        {
+            if (index % 2 == 0)
+            {
+                Body.GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                Body.GetComponent<MeshRenderer>().enabled = true;
+            }
+            yield return new WaitForSeconds(.5f);
+        }
+        Body.GetComponent<MeshRenderer>().enabled = true;
     }
 }
