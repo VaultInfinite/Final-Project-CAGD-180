@@ -9,8 +9,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //Designation for the player model to allow the player to blink upon taking damage.
+    //Designations for the player model to allow the player to blink upon taking damage.
     public GameObject Body;
+    public GameObject Tail1;
+    public GameObject Tail2;
+    public GameObject Tail3;
+    public GameObject Tail4;
+    public GameObject Tail5;
+    public GameObject Ear1;
+    public GameObject Ear2;
+    public GameObject Eye1;
+    public GameObject Eye2;
+    public GameObject Iris1;
+    public GameObject Iris2;
+    public GameObject Nose;
 
     //The speed at which the player will move.
     public float speed = 5f;
@@ -137,13 +149,49 @@ public class PlayerController : MonoBehaviour
             if (index % 2 == 0)
             {
                 Body.GetComponent<MeshRenderer>().enabled = false;
+                Tail1.GetComponent<MeshRenderer>().enabled = false;
+                Tail2.GetComponent<MeshRenderer>().enabled = false;
+                Tail3.GetComponent<MeshRenderer>().enabled = false;
+                Tail4.GetComponent<MeshRenderer>().enabled = false;
+                Tail5.GetComponent<MeshRenderer>().enabled = false;
+                Ear1.GetComponent<MeshRenderer>().enabled = false;
+                Ear2.GetComponent<MeshRenderer>().enabled = false;
+                Eye1.GetComponent<MeshRenderer>().enabled = false;
+                Eye2.GetComponent<MeshRenderer>().enabled = false;
+                Iris1.GetComponent<MeshRenderer>().enabled = false;
+                Iris2.GetComponent<MeshRenderer>().enabled = false;
+                Nose.GetComponent<MeshRenderer>().enabled = false;
             }
             else
             {
                 Body.GetComponent<MeshRenderer>().enabled = true;
+                Tail1.GetComponent<MeshRenderer>().enabled = true;
+                Tail2.GetComponent<MeshRenderer>().enabled = true;
+                Tail3.GetComponent<MeshRenderer>().enabled = true;
+                Tail4.GetComponent<MeshRenderer>().enabled = true;
+                Tail5.GetComponent<MeshRenderer>().enabled = true;
+                Ear1.GetComponent<MeshRenderer>().enabled = true;
+                Ear2.GetComponent<MeshRenderer>().enabled = true;
+                Eye1.GetComponent<MeshRenderer>().enabled = true;
+                Eye2.GetComponent<MeshRenderer>().enabled = true;
+                Iris1.GetComponent<MeshRenderer>().enabled = true;
+                Iris2.GetComponent<MeshRenderer>().enabled = true;
+                Nose.GetComponent<MeshRenderer>().enabled = true;
             }
             yield return new WaitForSeconds(.5f);
         }
         Body.GetComponent<MeshRenderer>().enabled = true;
+        Tail1.GetComponent<MeshRenderer>().enabled = true;
+        Tail2.GetComponent<MeshRenderer>().enabled = true;
+        Tail3.GetComponent<MeshRenderer>().enabled = true;
+        Tail4.GetComponent<MeshRenderer>().enabled = true;
+        Tail5.GetComponent<MeshRenderer>().enabled = true;
+        Ear1.GetComponent<MeshRenderer>().enabled = true;
+        Ear2.GetComponent<MeshRenderer>().enabled = true;
+        Eye1.GetComponent<MeshRenderer>().enabled = true;
+        Eye2.GetComponent<MeshRenderer>().enabled = true;
+        Iris1.GetComponent<MeshRenderer>().enabled = true;
+        Iris2.GetComponent<MeshRenderer>().enabled = true;
+        Nose.GetComponent<MeshRenderer>().enabled = true;
     }
 }
