@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * Salmoria, Wyatt & Aquino, Vicky
+ * 11/16/23
+ * This script controls the enemy navigation
+ */
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject player;
 
-    // Update is called once per frame
-    void Update()
+    public float speed;
+
+    private float distance;
+
+    private void Update()
     {
-        
+        this.gameObject.transform.LookAt(player.transform);
+        distance = Vector3.Distance(transform.position, player.transform.position);
+        Vector3 direction = player.transform.position - transform.position;
+
+        transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
     }
 }
