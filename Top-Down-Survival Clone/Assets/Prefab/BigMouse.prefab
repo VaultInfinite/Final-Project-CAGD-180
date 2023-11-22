@@ -81,21 +81,29 @@ PrefabInstance:
       propertyPath: speed
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7251303272877749987, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251303272877749987, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.723
+      objectReference: {fileID: 0}
     - target: {fileID: 7539822246655691390, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
       propertyPath: m_Name
       value: BigMouse
       objectReference: {fileID: 0}
     - target: {fileID: 8455779894681238749, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 8455779894681238749, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.009
       objectReference: {fileID: 0}
     - target: {fileID: 8455779894681238749, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.113
       objectReference: {fileID: 0}
     - target: {fileID: 8455779894681238749, guid: 51646f98ae4cec1409d239b5ce5bce9d, type: 3}
       propertyPath: m_LocalRotation.w
