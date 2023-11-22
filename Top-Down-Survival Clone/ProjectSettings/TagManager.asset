@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - EnemyLvl2
   - EnemyLvl3
+  - Crate
   layers:
   - Default
   - TransparentFX
