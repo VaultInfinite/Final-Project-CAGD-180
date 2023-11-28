@@ -1,3 +1,8 @@
+/*
+ * 
+ * 
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,81 +25,100 @@ public class PlayerRotation : MonoBehaviour
     /// </summary>
     public void rotate()
     {
-        if (Input.GetKeyDown(KeyCode.A) && facingForward == true)
+        Vector3 LookDirection = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.up * -90);
-            facingForward = false;
-            facingLeft = true;
+            LookDirection += Vector3.left;
         }
-        if (Input.GetKeyDown(KeyCode.A) && facingRight == true)
+        if (Input.GetKey(KeyCode.W))
         {
-            transform.Rotate(Vector3.up * 180);
-            facingRight = false;
-            facingLeft = true;
+            LookDirection += Vector3.forward;
         }
-        if (Input.GetKeyDown(KeyCode.A) && facingBack == true)
+        if (Input.GetKey(KeyCode.S))
         {
-            transform.Rotate(Vector3.up * 90);
-            facingBack = false;
-            facingLeft = true;
+            LookDirection += Vector3.back;
         }
-        if (Input.GetKeyDown(KeyCode.D) && facingForward == true)
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.up * 90);
-            facingForward = false;
-            facingRight = true;
+            LookDirection += Vector3.right;
         }
-        if (Input.GetKeyDown(KeyCode.D) && facingLeft == true)
+        if (LookDirection != Vector3.zero)
         {
-            transform.Rotate(Vector3.up * 180);
-            facingLeft = false;
-            facingRight = true;
-        }
-        if (Input.GetKeyDown(KeyCode.D) && facingBack == true)
-        {
-            transform.Rotate(Vector3.up * -90);
-            facingRight = false;
-            facingRight = true;
-        }
-        if (Input.GetKeyDown(KeyCode.W) && facingRight == true)
-        {
-            transform.Rotate(Vector3.up * -90);
-            facingRight = false;
-            facingForward = true;
-        }
-        if (Input.GetKeyDown(KeyCode.W) && facingLeft == true)
-        {
-            transform.Rotate(Vector3.up * 90);
-            facingLeft = false;
-            facingForward = true;
-        }
-        if (Input.GetKeyDown(KeyCode.W) && facingBack == true)
-        {
-            transform.Rotate(Vector3.up * 180);
-            facingBack = false;
-            facingForward = true;
-        }
-        if (Input.GetKeyDown(KeyCode.S) && facingRight == true)
-        {
-            transform.Rotate(Vector3.up * 90);
-            facingRight = false;
-            facingBack = true;
-        }
-        if (Input.GetKeyDown(KeyCode.S) && facingLeft == true)
-        {
-            transform.Rotate(Vector3.up * -90);
-            facingLeft = false;
-            facingBack = true;
-        }
-        if (Input.GetKeyDown(KeyCode.S) && facingForward == true)
-        {
-            transform.Rotate(Vector3.up * 180);
-            facingForward = false;
-            facingBack = true;
+            transform.rotation = Quaternion.LookRotation(LookDirection);
         }
 
-
-
-
+        //if (Input.GetKeyDown(KeyCode.A) && facingForward == true)
+        //{
+        //    transform.Rotate(Vector3.up * -90);
+        //    facingForward = false;
+        //    facingLeft = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.A) && facingRight == true)
+        //{
+        //    transform.Rotate(Vector3.up * 180);
+        //    facingRight = false;
+        //    facingLeft = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.A) && facingBack == true)
+        //{
+        //    transform.Rotate(Vector3.up * 90);
+        //    facingBack = false;
+        //    facingLeft = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.D) && facingForward == true)
+        //{
+        //    transform.Rotate(Vector3.up * 90);
+        //    facingForward = false;
+        //    facingRight = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.D) && facingLeft == true)
+        //{
+        //    transform.Rotate(Vector3.up * 180);
+        //    facingLeft = false;
+        //    facingRight = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.D) && facingBack == true)
+        //{
+        //    transform.Rotate(Vector3.up * -90);
+        //    facingRight = false;
+        //    facingRight = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.W) && facingRight == true)
+        //{
+        //    transform.Rotate(Vector3.up * -90);
+        //    facingRight = false;
+        //    facingForward = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.W) && facingLeft == true)
+        //{
+        //    transform.Rotate(Vector3.up * 90);
+        //    facingLeft = false;
+        //    facingForward = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.W) && facingBack == true)
+        //{
+        //    transform.Rotate(Vector3.up * 180);
+        //    facingBack = false;
+        //    facingForward = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.S) && facingRight == true)
+        //{
+        //    transform.Rotate(Vector3.up * 90);
+        //    facingRight = false;
+        //    facingBack = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.S) && facingLeft == true)
+        //{
+        //    transform.Rotate(Vector3.up * -90);
+        //    facingLeft = false;
+        //    facingBack = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.S) && facingForward == true)
+        //{
+        //    transform.Rotate(Vector3.up * 180);
+        //    facingForward = false;
+        //    facingBack = true;
+        //}
     }
 }
