@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 22144de76ec329145ab684da8b582aa6
+  - enabled: 1
+    path: Assets/Scenes/Vicky's Scene.unity
+    guid: e01c831d0f44c6847b397e0c33fe3ecd
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: e79eea5d39acebd4a823db610a39deac
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: ce6b2859bdd5aed41a6454774e4eca2d
   m_configObjects: {}

@@ -9,6 +9,8 @@ TagManager:
   - EnemyLvl2
   - EnemyLvl3
   - Crate
+  - Menu
+  - Pause
   layers:
   - Default
   - TransparentFX
