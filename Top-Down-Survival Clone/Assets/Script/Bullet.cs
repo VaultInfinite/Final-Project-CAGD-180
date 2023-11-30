@@ -1,3 +1,8 @@
+/*
+ * Salmoria, Wyatt & Aquino, Vicky
+ * 11/30/23
+ * This script controls the bullet movement and overall properties of the bullet.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

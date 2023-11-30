@@ -1,7 +1,7 @@
 /*
  * Salmoria, Wyatt & Aquino, Vicky
  * 11/16/23
- * This script allows the player to control the player model via movement, fire weapons, and 
+ * This script allows the player to control the player model via movement and fire weapons
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -29,13 +29,14 @@ public class PlayerController : MonoBehaviour
 
     //The amount of health the player currently has at any point.
     public int health;
+
     //The amount of health the player can have maximum at any point.
     public int healthLimit;
 
     //The amount of coins the player has gained.
     public int coins;
 
-    //location where the player respawns to
+    //location where the player respawns to.
     private Vector3 startPos;
 
     //Designation for Rigidbody for jumping.
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     //Designation for moving back
     private bool movingBack;
 
-    //Designation for Invulnerability to help the player survive close encounters
+    //Designation for Invulnerability to help the player survive close encounters.
     private bool invuln = false;
 
     // Start is called before the first frame update
@@ -148,6 +149,7 @@ public class PlayerController : MonoBehaviour
         {
             if (index % 2 == 0)
             {
+                //The list of meshrenderers that will be toggled; all tied to individual parts of model.
                 Body.GetComponent<MeshRenderer>().enabled = false;
                 Tail1.GetComponent<MeshRenderer>().enabled = false;
                 Tail2.GetComponent<MeshRenderer>().enabled = false;
@@ -164,6 +166,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                //The list of meshrenderers that will be toggled; all tied to individual parts of model.
                 Body.GetComponent<MeshRenderer>().enabled = true;
                 Tail1.GetComponent<MeshRenderer>().enabled = true;
                 Tail2.GetComponent<MeshRenderer>().enabled = true;
@@ -180,6 +183,7 @@ public class PlayerController : MonoBehaviour
             }
             yield return new WaitForSeconds(.5f);
         }
+        //The list of meshrenderers that will be toggled; all tied to individual parts of model.
         Body.GetComponent<MeshRenderer>().enabled = true;
         Tail1.GetComponent<MeshRenderer>().enabled = true;
         Tail2.GetComponent<MeshRenderer>().enabled = true;
