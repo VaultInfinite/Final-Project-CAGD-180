@@ -774,7 +774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1430279283326558196, guid: 94d86046cb6b5364fae7cb0c800dd3f1, type: 3}
       propertyPath: m_TagString
-      value: Pause
+      value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 3868899638980482756, guid: 94d86046cb6b5364fae7cb0c800dd3f1, type: 3}
       propertyPath: PausePanel
