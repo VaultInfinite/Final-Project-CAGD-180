@@ -9,6 +9,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject bulletPrefab;
+
     //Designations for the player model to allow the player to blink upon taking damage.
     public GameObject Body;
     public GameObject Tail1;

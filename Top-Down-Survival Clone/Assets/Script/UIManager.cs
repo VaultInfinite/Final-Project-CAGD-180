@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject PausePanel;
     public Slider HealthSlider;
     public PlayerController PlayerScript;
-    public TextMeshProUGUI HealthText;
+    public TextMeshProUGUI HealthText, coinsText;
 
     public void startRestart()
     {
@@ -39,6 +39,11 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void Instructions()
+    {
+        SceneManager.LoadScene(4);
+    }
+
     private void Update()
     {
         if (this.gameObject.CompareTag("Pause"))
@@ -54,6 +59,11 @@ public class UIManager : MonoBehaviour
             HealthSlider.maxValue = PlayerScript.healthLimit;
             HealthSlider.value = PlayerScript.health;
             HealthText.text = PlayerScript.health.ToString();
+            coinsText.text = "Coins: " + PlayerScript.coins.ToString();
+            if (PlayerScript.health <= 0)
+            {
+                LoseGame();
+            }
         }
     }
 
