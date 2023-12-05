@@ -1,6 +1,6 @@
 /*
  * Salmoria, Wyatt & Aquino, Vicky
- * 11/16/23
+ * 12/05/23
  * This script controls the enemy navigation
  */
 using System.Collections;
@@ -13,7 +13,9 @@ public class EnemyController : MonoBehaviour
 
     public float speed;
 
-    private float distance;
+    public float distance;
+
+    public int damage;
 
     private void Update()
     {

@@ -10,7 +10,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed;
-    public int damage, distance;
+    public int damage, lifetime;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,14 +23,6 @@ public class Bullet : MonoBehaviour
         {
             // do a thing
         }
-        if (other.gameObject.CompareTag("EnemyLvl2"))
-        {
-            // do a thing
-        }
-        if (other.gameObject.CompareTag("EnemyLvl3"))
-        {
-            // do a thing
-        }
     }
     private void Start()
     {
@@ -39,13 +31,13 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position += speed * Time.deltaTime * Vector3.forward;
+        transform.position += speed * Time.deltaTime * transform.forward;
     }
 
 
     IEnumerator despawnTimer()
     {
-        yield return new WaitForSeconds(distance);
+        yield return new WaitForSeconds(lifetime);
 
         Destroy(gameObject);
     }

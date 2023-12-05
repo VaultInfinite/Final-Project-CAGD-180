@@ -5,6 +5,7 @@
  */
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -37,6 +38,15 @@ public class PlayerController : MonoBehaviour
 
     //The amount of coins the player has gained.
     public int coins;
+
+    //The amount of damage the player deals.
+    public int damage = 1;
+
+    //The projectile speed of the player's weapon.
+    public int projectileSpeed = 3; 
+
+    //The fire rate of the player's weapon.
+    public int fireRate;
 
     //location where the player respawns to.
     private Vector3 startPos;
@@ -89,6 +99,68 @@ public class PlayerController : MonoBehaviour
             //translate the player right by speed using time.deltatime
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
+        //player weapon
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerWeapon();
+        }
+    }
+
+    /// <summary>
+    /// This section dictates the fire rate of the player's weapon, the damage, and the target, all of which will be upgradeable via coin collection.
+    /// </summary>
+    private void PlayerWeapon()
+    {
+        GameObject target = TargetSelection();
+
+        if (target == null)
+        {
+            return;
+        }
+
+        //Grabs the position of the player and the target.
+        Vector3 position = transform.position;
+        Vector3 targetPosition = target.transform.position;
+
+        //Does the mathematics for the direction the bullet is required to travel.
+        Vector3 direction = (targetPosition - position).normalized;
+
+        //Spawns in the Bullet with position and rotation.
+        GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(direction));
+
+        //Changes the variables of the bullet according to upgrades obtained.
+        bulletInstance.GetComponent<Bullet>().speed = projectileSpeed;
+        bulletInstance.GetComponent<Bullet>().damage = damage;
+    }
+
+    /// <summary>
+    /// Decides which enemy needs to be targeted.
+    /// </summary>
+    private GameObject TargetSelection()
+    {
+        //Array for all the enemies to properly be found via tag.
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //Designation for the closest enemy as well as declaring it null at start.
+        GameObject closestEnemy = null;
+        //The distance of the closest enemy.
+        float closestDist = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            if (closestEnemy == null)
+            {
+                closestEnemy = enemy;
+                closestDist = closestEnemy.GetComponent<EnemyController>().distance;
+            }
+            //The distance of the enemy being compared to the currently logged closest enemy.
+            float enemyCompare = 0;
+            enemyCompare = enemy.GetComponent<EnemyController>().distance;
+            if (closestDist >= enemyCompare)
+            {
+                closestDist = enemyCompare;
+                closestEnemy = enemy;
+            }
+        }
+        return closestEnemy;
     }
 
     /// <summary>
@@ -98,8 +170,10 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(InvulnTimer());
         StartCoroutine(Blink());
-        
-
+        if (health <= 0)
+        {
+            //Swap scene here :)
+        }
     }
     
     /// <summary>
@@ -111,19 +185,7 @@ public class PlayerController : MonoBehaviour
         //If we collide with an enemy, take damage.
         if (other.gameObject.tag == "Enemy" && invuln == false)
         {
-            health -= 1;
-            Damage();
-        }
-        //If we collide with a difficulty 2 enemy, take more damage.
-        if (other.gameObject.tag == "EnemyLvl2" && invuln == false)
-        {
-            health -= 2;
-            Damage();
-        }
-        //If we collide with a difficulty 3 enemy, take even more damage.
-        if (other.gameObject.tag == "EnemyLvl3" && invuln == false)
-        {
-            health -= 3;
+            health -= other.GetComponent<EnemyController>().damage;
             Damage();
         }
         //If we collide with a coin, pickup coin.

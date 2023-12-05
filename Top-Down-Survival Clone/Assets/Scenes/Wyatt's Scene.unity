@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 160530721}
   - component: {fileID: 160530720}
   - component: {fileID: 160530724}
+  - component: {fileID: 160530725}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Enemy
@@ -256,6 +257,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &160530725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160530719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4386d6281fde3f24ebaa064d85bda2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 472586363214546593}
+  speed: 0
+  distance: 0
+  damage: 1
 --- !u!1 &285725609
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,10 +548,6 @@ PrefabInstance:
     - target: {fileID: 2845965123804659413, guid: f77ae0a49cf2a094e8dc533ea691f3d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8777919416661758514, guid: f77ae0a49cf2a094e8dc533ea691f3d0, type: 3}
-      propertyPath: m_Constraints
-      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
