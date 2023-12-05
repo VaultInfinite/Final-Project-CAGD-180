@@ -1,3 +1,8 @@
+/*
+ * Aquino, Vicky & Salmoria, Wyatt
+ * 11/27/23
+ * This script controls the UI elements of the game as well as scene management.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

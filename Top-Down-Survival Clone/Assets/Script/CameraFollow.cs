@@ -1,7 +1,7 @@
 /*
- * 
- * 
- * 
+ * Salmoria, Wyatt & Aquino, Vicky
+ * 11/27/23
+ * Allows the camera to follow the player following designation
  */
 using System.Collections;
 using System.Collections.Generic;

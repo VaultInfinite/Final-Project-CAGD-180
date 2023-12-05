@@ -1,3 +1,8 @@
+/*
+ * Aquino, Vicky & Salmoria, Wyatt
+ * 11/27/23
+ * Controls the crate and dictates how many coins it contains.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

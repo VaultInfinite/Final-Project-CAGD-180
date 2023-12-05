@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 /*
  * Salmoria, Wyatt & Aquino, Vicky
  * 11/16/23
  * This script controls the enemy navigation
  */
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
