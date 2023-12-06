@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject temp = Instantiate(EnemyPrefab[randomIndex]);
             temp.transform.position = GetRandomPointInCollider(GetComponent<BoxCollider>());
         }
-        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        Destroy(this.gameObject);
     }
 
     Vector3 GetRandomPointInCollider(Collider collider)
