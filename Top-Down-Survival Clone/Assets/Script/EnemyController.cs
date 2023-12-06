@@ -25,4 +25,10 @@ public class EnemyController : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
     }
+
+    public void KillEnemy()
+    {
+        player.GetComponent<PlayerController>().addEnemyKilled();
+        Destroy(this.gameObject);
+    }
 }

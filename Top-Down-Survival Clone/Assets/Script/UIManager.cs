@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     public GameObject PausePanel;
     public Slider HealthSlider;
     public PlayerController PlayerScript;
-    public TextMeshProUGUI HealthText, coinsText;
+    public TextMeshProUGUI HealthText, coinsText, KillText;
 
     public void startRestart()
     {
@@ -65,9 +65,18 @@ public class UIManager : MonoBehaviour
             HealthSlider.value = PlayerScript.health;
             HealthText.text = PlayerScript.health.ToString();
             coinsText.text = "Coins: " + PlayerScript.coins.ToString();
+            KillText.text = "Mice Killed: " + PlayerScript.EnemiesKilled.ToString();
             if (PlayerScript.health <= 0)
             {
                 LoseGame();
+            }
+            if (PlayerScript.coins >= 30)
+            {
+                WinGame();
+            }
+            if (PlayerScript.EnemiesKilled >= 10)
+            {
+                WinGame();
             }
         }
     }

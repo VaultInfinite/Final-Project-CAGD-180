@@ -5,6 +5,7 @@
  */
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -21,7 +22,8 @@ public class Bullet : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
-            // do a thing
+            other.gameObject.GetComponent<EnemyController>().KillEnemy();
+            Destroy(gameObject);
         }
     }
     private void Start()

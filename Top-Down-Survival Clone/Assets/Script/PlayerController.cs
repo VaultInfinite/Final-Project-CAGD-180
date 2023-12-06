@@ -10,6 +10,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    // Int that allows me to count the number of enemies Killed
+    public int EnemiesKilled;
+
     public GameObject bulletPrefab;
 
     //Designations for the player model to allow the player to blink upon taking damage.
@@ -73,6 +77,8 @@ public class PlayerController : MonoBehaviour
         startPos = transform.position;
         //set the reference to the player's attached rigidbody
         rigidbody = GetComponent<Rigidbody>();
+        EnemiesKilled = 0;
+        coins = 0;
     }
 
     // Update is called once per frame
@@ -173,6 +179,7 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             //Swap scene here :)
+            // This is done in UIManager
         }
     }
     
@@ -261,5 +268,11 @@ public class PlayerController : MonoBehaviour
         Iris1.GetComponent<MeshRenderer>().enabled = true;
         Iris2.GetComponent<MeshRenderer>().enabled = true;
         Nose.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+
+    public void addEnemyKilled()
+    {
+        EnemiesKilled++;
     }
 }
