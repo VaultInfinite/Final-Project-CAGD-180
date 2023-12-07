@@ -222,7 +222,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2304682254170941116}
   - component: {fileID: 2428350149495627390}
-  - component: {fileID: 8078069740173427524}
   - component: {fileID: 2506595015773926350}
   m_Layer: 0
   m_Name: Mouse02
@@ -273,31 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4386d6281fde3f24ebaa064d85bda2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7784720688776758200, guid: f77ae0a49cf2a094e8dc533ea691f3d0, type: 3}
+  player: {fileID: 0}
   speed: 2
   distance: 0
   damage: 2
---- !u!65 &8078069740173427524
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2032009925259994237}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 5.3, z: 1}
-  m_Center: {x: 0, y: 2.22, z: 0}
 --- !u!54 &2506595015773926350
 Rigidbody:
   m_ObjectHideFlags: 0
