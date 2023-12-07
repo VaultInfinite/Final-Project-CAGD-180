@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Decides which enemy needs to be targeted.
+    /// Decides which enemy needs to be targeted by taking the distance of each enemy in an array, comparing it to the enemy prior, and continuing until all enemies in the array are compared.
     /// </summary>
     private GameObject TargetSelection()
     {
@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour
         float closestDist = 0;
         foreach (GameObject enemy in enemies)
         {
+            //First run of this foreach loop, the program checks if closestenemy is null, and will assign the first enemy in the array to the position, as well as grab distance.
             if (closestEnemy == null)
             {
                 closestEnemy = enemy;
