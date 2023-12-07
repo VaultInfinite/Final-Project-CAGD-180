@@ -36,6 +36,7 @@ Transform:
   - {fileID: 8085618208745718870}
   - {fileID: 5405415709515453888}
   - {fileID: 2830059743276971882}
+  - {fileID: 7451865980075099714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7784720688776758200
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120293d7a77170a459bb18491a63d175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemiesKilled: 0
   bulletPrefab: {fileID: 837353341200697350, guid: 562382723953e604caf517e2f448d445, type: 3}
   Body: {fileID: 6729507967870581378}
   Tail1: {fileID: 532265905880306348}
@@ -68,8 +70,9 @@ MonoBehaviour:
   health: 100
   healthLimit: 100
   coins: 0
-  damage: 0
-  fireRate: 0
+  damage: 1
+  projectileSpeed: 6
+  fireRate: 1
 --- !u!23 &8229033851626937973
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -182,6 +185,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2845965123804659413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3309830821184802585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7451865980075099714}
+  - component: {fileID: 5370850407372746098}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7451865980075099714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3309830821184802585}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2845965123804659413}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5370850407372746098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3309830821184802585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed151178b79d314f8c147ebd970aab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 661549096948497991}
+  enemy1: {fileID: 2032009925259994237, guid: cf18a984238839d4cae0751f5b877383, type: 3}
+  enemy2: {fileID: 2032009925259994237, guid: d546ce3ec681e4846b6a0e4aea4056c4, type: 3}
+  enemy3: {fileID: 2032009925259994237, guid: 81a17fcd63e70d447be5bd42e139663a, type: 3}
+  enemyBoss: {fileID: 8337298643388571731, guid: 9f0d7312473122f4cbfa498537cd7dc2, type: 3}
 --- !u!1 &8868201739027098295
 GameObject:
   m_ObjectHideFlags: 0

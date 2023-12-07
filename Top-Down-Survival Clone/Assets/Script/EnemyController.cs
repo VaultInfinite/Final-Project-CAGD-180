@@ -23,7 +23,11 @@ public class EnemyController : MonoBehaviour
         distance = Vector3.Distance(transform.position, player.transform.position);
         Vector3 direction = player.transform.position - transform.position;
 
-        transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+        //Additions by Wyatt; Lets the mouse stay on the ground properly instead of floating up to the Player's y position and casting a strange shadow.
+        Vector3 PlayerPosition = player.transform.position;
+        PlayerPosition.Scale(new Vector3(1f,0f,1f));
+
+        transform.position = Vector3.MoveTowards(this.transform.position, PlayerPosition, speed * Time.deltaTime);
     }
 
     public void KillEnemy()

@@ -273,9 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4386d6281fde3f24ebaa064d85bda2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 661549096948497991, guid: f77ae0a49cf2a094e8dc533ea691f3d0, type: 3}
+  player: {fileID: 7784720688776758200, guid: f77ae0a49cf2a094e8dc533ea691f3d0, type: 3}
   speed: 2
-  DistanceToUse: 0
+  distance: 0
   damage: 2
 --- !u!65 &8078069740173427524
 BoxCollider:

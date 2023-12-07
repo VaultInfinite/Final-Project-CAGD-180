@@ -1,6 +1,6 @@
 /*
  * Salmoria, Wyatt & Aquino, Vicky
- * 11/27/23
+ * 12/5/23
  * This script allows the player to control the player model via movement and fire weapons
  */
 using System.Collections;
