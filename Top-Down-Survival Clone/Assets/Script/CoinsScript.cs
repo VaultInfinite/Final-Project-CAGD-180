@@ -15,13 +15,7 @@ public class CoinsScript : MonoBehaviour
     public EnemySpawnScript spawning;
 
     //Coins variable to store the coins the player is picking up in the player script.
-    
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

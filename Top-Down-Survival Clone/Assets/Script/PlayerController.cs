@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         startPos = transform.position;
         //set the reference to the player's attached rigidbody
         rigidbody = GetComponent<Rigidbody>();
+        // set the kill count and coins collected to 0
         EnemiesKilled = 0;
         coins = 0;
 

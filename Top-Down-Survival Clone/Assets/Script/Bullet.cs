@@ -10,16 +10,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    // the variables to control the speed
     public float speed;
+    // the variable to control how much damage the bullet does and how long it lasts before despawning
     public int damage, lifetime;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Crate"))
-        {
-            other.gameObject.GetComponent<Crate>().dropCoins();
-            Destroy(gameObject);
-        }
+        // if the bullet hits an enemy call the killEnemy function from said enemy and then destroy it.
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyController>().KillEnemy();
@@ -28,17 +26,20 @@ public class Bullet : MonoBehaviour
     }
     private void Start()
     {
+        // start the despawn timer
         StartCoroutine(despawnTimer());  
     }
 
     private void Update()
     {
+        // move the bullet forward
         transform.position += speed * Time.deltaTime * transform.forward;
     }
 
 
     IEnumerator despawnTimer()
     {
+        // wait for x seconds (set by the lifetime variable) and then detroy this gameobject
         yield return new WaitForSeconds(lifetime);
 
         Destroy(gameObject);
