@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     // Int that allows me to count the number of enemies Killed
     public int EnemiesKilled;
 
+    //Designation for the bullet prefab.
     public GameObject bulletPrefab;
 
     //Designations for the player model to allow the player to blink upon taking damage.
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     public int projectileSpeed = 3; 
 
     //The fire rate of the player's weapon.
-    public int fireRate;
+    public int fireRate = 60;
 
     //location where the player respawns to.
     private Vector3 startPos;
@@ -58,17 +59,12 @@ public class PlayerController : MonoBehaviour
     //Designation for Rigidbody for jumping.
     private Rigidbody rigidbody;
 
-    //Designation for moving forward
-    private bool movingForward;
-    //Designation for moving left
-    private bool movingLeft;
-    //Designation for moving right
-    private bool movingRight;
-    //Designation for moving back
-    private bool movingBack;
-
     //Designation for Invulnerability to help the player survive close encounters.
     private bool invuln = false;
+    //Designation for Cooldown of the player weapon that dictates how look it will take before firing again.
+    private bool recharge = false;
+    //Designation for the player damage state; checks if the player is recently damaged, made specifically for invokerepeating req.
+    private bool recentlyDamaged = false;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +75,8 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         EnemiesKilled = 0;
         coins = 0;
+
+        InvokeRepeating("Blink", 0.0f,0.4f);
     }
 
     // Update is called once per frame
@@ -105,8 +103,7 @@ public class PlayerController : MonoBehaviour
             //translate the player right by speed using time.deltatime
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
-        //player weapon
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (recharge == false)
         {
             PlayerWeapon();
         }
@@ -117,6 +114,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void PlayerWeapon()
     {
+        StartCoroutine(BulletRate());
         GameObject target = TargetSelection();
 
         if (target == null)
@@ -176,7 +174,7 @@ public class PlayerController : MonoBehaviour
     private void Damage()
     {
         StartCoroutine(InvulnTimer());
-        StartCoroutine(Blink());
+        StartCoroutine(Damaged());
         if (health <= 0)
         {
             //Swap scene here :)
@@ -204,6 +202,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Controls the blinking of the player; allows the player to know when they take damage.
+    /// </summary>
+    private void Blink()
+    {
+        if (!recentlyDamaged)
+        {
+            //If not recently damaged, will enable mesh renderer in the case that recentlydamaged previously set mesh to off.
+            Body.GetComponent<MeshRenderer>().enabled = true;
+            Tail1.GetComponent<MeshRenderer>().enabled = true;
+            Tail2.GetComponent<MeshRenderer>().enabled = true;
+            Tail3.GetComponent<MeshRenderer>().enabled = true;
+            Tail4.GetComponent<MeshRenderer>().enabled = true;
+            Tail5.GetComponent<MeshRenderer>().enabled = true;
+            Ear1.GetComponent<MeshRenderer>().enabled = true;
+            Ear2.GetComponent<MeshRenderer>().enabled = true;
+            Eye1.GetComponent<MeshRenderer>().enabled = true;
+            Eye2.GetComponent<MeshRenderer>().enabled = true;
+            Iris1.GetComponent<MeshRenderer>().enabled = true;
+            Iris2.GetComponent<MeshRenderer>().enabled = true;
+            Nose.GetComponent<MeshRenderer>().enabled = true;
+
+            return;
+        }
+        //If player is damaged, mesh renderer on all player parts will be toggled.
+        Body.GetComponent<MeshRenderer>().enabled = !Body.GetComponent<MeshRenderer>().enabled;
+        Tail1.GetComponent<MeshRenderer>().enabled = !Tail1.GetComponent<MeshRenderer>().enabled;
+        Tail2.GetComponent<MeshRenderer>().enabled = !Tail2.GetComponent<MeshRenderer>().enabled;
+        Tail3.GetComponent<MeshRenderer>().enabled = !Tail3.GetComponent<MeshRenderer>().enabled;
+        Tail4.GetComponent<MeshRenderer>().enabled = !Tail4.GetComponent<MeshRenderer>().enabled;
+        Tail5.GetComponent<MeshRenderer>().enabled = !Tail5.GetComponent<MeshRenderer>().enabled;
+        Ear1.GetComponent<MeshRenderer>().enabled = !Ear1.GetComponent<MeshRenderer>().enabled;
+        Ear2.GetComponent<MeshRenderer>().enabled = !Ear2.GetComponent<MeshRenderer>().enabled;
+        Eye1.GetComponent<MeshRenderer>().enabled = !Eye1.GetComponent<MeshRenderer>().enabled;
+        Eye2.GetComponent<MeshRenderer>().enabled = !Eye2.GetComponent<MeshRenderer>().enabled;
+        Iris1.GetComponent<MeshRenderer>().enabled = !Iris1.GetComponent<MeshRenderer>().enabled;
+        Iris2.GetComponent<MeshRenderer>().enabled = !Iris2.GetComponent<MeshRenderer>().enabled;
+        Nose.GetComponent<MeshRenderer>().enabled = !Nose.GetComponent<MeshRenderer>().enabled;
+    }
 
     //Enumerator for invulnerability, dictates whether or not the player will take damage when making contact.
     IEnumerator InvulnTimer()
@@ -214,63 +251,24 @@ public class PlayerController : MonoBehaviour
         //Set invulnerability bool to false
         invuln = false;
     }
-    //Ienumerator for the blinking of the player; allows the player to know when they take damage.
-    IEnumerator Blink()
+    //Enumerator for the recharge of the player weapon; allows the weapon to have intervals of time between firing again.
+    IEnumerator BulletRate()
     {
-        for (int index = 0; index < 2; index++)
-        {
-            if (index % 2 == 0)
-            {
-                //The list of meshrenderers that will be toggled; all tied to individual parts of model.
-                Body.GetComponent<MeshRenderer>().enabled = false;
-                Tail1.GetComponent<MeshRenderer>().enabled = false;
-                Tail2.GetComponent<MeshRenderer>().enabled = false;
-                Tail3.GetComponent<MeshRenderer>().enabled = false;
-                Tail4.GetComponent<MeshRenderer>().enabled = false;
-                Tail5.GetComponent<MeshRenderer>().enabled = false;
-                Ear1.GetComponent<MeshRenderer>().enabled = false;
-                Ear2.GetComponent<MeshRenderer>().enabled = false;
-                Eye1.GetComponent<MeshRenderer>().enabled = false;
-                Eye2.GetComponent<MeshRenderer>().enabled = false;
-                Iris1.GetComponent<MeshRenderer>().enabled = false;
-                Iris2.GetComponent<MeshRenderer>().enabled = false;
-                Nose.GetComponent<MeshRenderer>().enabled = false;
-            }
-            else
-            {
-                //The list of meshrenderers that will be toggled; all tied to individual parts of model.
-                Body.GetComponent<MeshRenderer>().enabled = true;
-                Tail1.GetComponent<MeshRenderer>().enabled = true;
-                Tail2.GetComponent<MeshRenderer>().enabled = true;
-                Tail3.GetComponent<MeshRenderer>().enabled = true;
-                Tail4.GetComponent<MeshRenderer>().enabled = true;
-                Tail5.GetComponent<MeshRenderer>().enabled = true;
-                Ear1.GetComponent<MeshRenderer>().enabled = true;
-                Ear2.GetComponent<MeshRenderer>().enabled = true;
-                Eye1.GetComponent<MeshRenderer>().enabled = true;
-                Eye2.GetComponent<MeshRenderer>().enabled = true;
-                Iris1.GetComponent<MeshRenderer>().enabled = true;
-                Iris2.GetComponent<MeshRenderer>().enabled = true;
-                Nose.GetComponent<MeshRenderer>().enabled = true;
-            }
-            yield return new WaitForSeconds(.5f);
-        }
-        //The list of meshrenderers that will be toggled; all tied to individual parts of model.
-        Body.GetComponent<MeshRenderer>().enabled = true;
-        Tail1.GetComponent<MeshRenderer>().enabled = true;
-        Tail2.GetComponent<MeshRenderer>().enabled = true;
-        Tail3.GetComponent<MeshRenderer>().enabled = true;
-        Tail4.GetComponent<MeshRenderer>().enabled = true;
-        Tail5.GetComponent<MeshRenderer>().enabled = true;
-        Ear1.GetComponent<MeshRenderer>().enabled = true;
-        Ear2.GetComponent<MeshRenderer>().enabled = true;
-        Eye1.GetComponent<MeshRenderer>().enabled = true;
-        Eye2.GetComponent<MeshRenderer>().enabled = true;
-        Iris1.GetComponent<MeshRenderer>().enabled = true;
-        Iris2.GetComponent<MeshRenderer>().enabled = true;
-        Nose.GetComponent<MeshRenderer>().enabled = true;
+        //Set the recharge bool to true
+        recharge = true;
+        yield return new WaitForSeconds(60f / fireRate);
+        //Set recharge bool to false
+        recharge = false;
     }
 
+    IEnumerator Damaged()
+    {
+        //Set the recentlyDamaged bool to true.
+        recentlyDamaged = true;
+        yield return new WaitForSeconds(1.6f);
+        //Set the recentlyDamaged bool to false.
+        recentlyDamaged = false;
+    }
 
     public void addEnemyKilled()
     {

@@ -25,7 +25,8 @@ public class EnemyController : MonoBehaviour
 
         //Additions by Wyatt; Lets the mouse stay on the ground properly instead of floating up to the Player's y position and casting a strange shadow.
         Vector3 PlayerPosition = player.transform.position;
-        PlayerPosition.Scale(new Vector3(1f,0f,1f));
+        //PlayerPosition.Scale(new Vector3(1f,0f,1f));
+        PlayerPosition.y -= 0.75f;
 
         transform.position = Vector3.MoveTowards(this.transform.position, PlayerPosition, speed * Time.deltaTime);
     }
