@@ -1,6 +1,6 @@
 /*
  * Aquino, Vicky & Salmoria, Wyatt
- * 11/27/23
+ * 12/8/23
  * This script controls the UI elements of the game as well as scene management.
  */
 using System.Collections;
@@ -23,9 +23,6 @@ public class UIManager : MonoBehaviour
     public PlayerController PlayerScript;
     // Access the text variables to tell the player the neumerical values of their health, coin count, and how many enemies they've killed.
     public TextMeshProUGUI HealthText, coinsText, KillText;
-    [Header("Win Conditions")]
-    public int CoinWinCondition;
-    public int EnemyWinCondition;
 
     // Restart the game by loading scene 0
     public void startRestart()
@@ -33,22 +30,30 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    // Load scene one, which is the final scene
+    // Load scene one, which is the first scene
     public void Play()
     {
         SceneManager.LoadScene(1);
+        ResumeGame();
+    }
+
+    //Load scene three, which is the second and final level.
+    public void Advance()
+    {
+        SceneManager.LoadScene(3);
+        ResumeGame();
     }
 
     // load the you lost scene
     public void LoseGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
     }
 
     // load the you won scene
     public void WinGame()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(5);
     }
 
     // quit the game, close the application entirely
@@ -60,7 +65,7 @@ public class UIManager : MonoBehaviour
     // send the player to the instruction scene
     public void Instructions()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(6);
     }
 
     private void Update()
@@ -86,22 +91,11 @@ public class UIManager : MonoBehaviour
             // tell the player how many coins they've collected
             coinsText.text = "Coins: " + PlayerScript.coins.ToString();
             // tell the player how many enemies they've killed
-            KillText.text = "Points: " + PlayerScript.EnemiesKilled.ToString();
+            KillText.text = "Enemies Defeated: " + PlayerScript.EnemiesKilled.ToString();
             if (PlayerScript.health <= 0)
             {
                 // if the player has zero or less health, call the LoseGame function
                 LoseGame();
-            }
-            // win the game if a or b occurs.
-            if (PlayerScript.coins >= CoinWinCondition)
-            {
-                // If the player collects x coins, call the WinGame function
-                WinGame();
-            }
-            if (PlayerScript.EnemiesKilled >= EnemyWinCondition)
-            {
-                // if the player kills y enemies, call the WinGame function
-                WinGame();
             }
         }
     }

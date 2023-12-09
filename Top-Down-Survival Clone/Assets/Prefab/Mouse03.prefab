@@ -227,10 +227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4386d6281fde3f24ebaa064d85bda2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 2
+  coinPrefab: {fileID: 600444354387518689, guid: ba4aff96d0c8cb547af90b322b2780b2, type: 3}
+  cratePrefab: {fileID: 677210428338441145, guid: a5bce0688ed592640945ebbaf1877013, type: 3}
+  player: {fileID: 661549096948497991, guid: f77ae0a49cf2a094e8dc533ea691f3d0, type: 3}
+  speed: 3
   distance: 0
-  damage: 3
+  damage: 1
+  health: 1
 --- !u!54 &4296908198706718086
 Rigidbody:
   m_ObjectHideFlags: 0

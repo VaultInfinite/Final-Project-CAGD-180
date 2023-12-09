@@ -1,6 +1,6 @@
 /*
  * Salmoria, Wyatt & Aquino, Vicky
- * 12/5/23
+ * 12/8/23
  * This script allows the player to control the player model via movement and fire weapons
  */
 using System.Collections;
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     public int damage = 1;
 
     //The projectile speed of the player's weapon.
-    public int projectileSpeed = 3; 
+    public float projectileSpeed = 3; 
 
     //The fire rate of the player's weapon.
     public int fireRate = 60;
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         coins = 0;
 
         InvokeRepeating("Blink", 0.0f,0.4f);
+        InvokeRepeating("HealthRegen", 0.0f, 5f);
     }
 
     // Update is called once per frame
@@ -115,9 +116,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void PlayerWeapon()
     {
+        //Dictates how long it will take before the player can shoot again; how long until the coroutine is done.
         StartCoroutine(BulletRate());
+        //Designation for the target selected through targetSelection; sets the path the bullet takes.
         GameObject target = TargetSelection();
-
+        //If there are no targets weapon will not fire.
         if (target == null)
         {
             return;
@@ -160,12 +163,14 @@ public class PlayerController : MonoBehaviour
             //The distance of the enemy being compared to the currently logged closest enemy.
             float enemyCompare = 0;
             enemyCompare = enemy.GetComponent<EnemyController>().distance;
+            //If an enemy in the array is closer to the player than the previously assigned closest, it will be assigned as the new closest enemy.
             if (closestDist >= enemyCompare)
             {
                 closestDist = enemyCompare;
                 closestEnemy = enemy;
             }
         }
+        //Once all enemies in array are calculated for distance and closestEnemy has been chosen, it returns closest enemy as a target.
         return closestEnemy;
     }
 
@@ -242,6 +247,17 @@ public class PlayerController : MonoBehaviour
         Iris2.GetComponent<MeshRenderer>().enabled = !Iris2.GetComponent<MeshRenderer>().enabled;
         Nose.GetComponent<MeshRenderer>().enabled = !Nose.GetComponent<MeshRenderer>().enabled;
     }
+    /// <summary>
+    /// Regenerates health through an invoke repeating.
+    /// </summary>
+    private void HealthRegen()
+    {
+        health += 2;
+        if (health >= healthLimit)
+        {
+            health = healthLimit;
+        }
+    }
 
     //Enumerator for invulnerability, dictates whether or not the player will take damage when making contact.
     IEnumerator InvulnTimer()
@@ -270,7 +286,9 @@ public class PlayerController : MonoBehaviour
         //Set the recentlyDamaged bool to false.
         recentlyDamaged = false;
     }
-
+    /// <summary>
+    /// When an enemy is defeated through the enemycontroller script, this will be called and add a number to the enemies killed total.
+    /// </summary>
     public void addEnemyKilled()
     {
         EnemiesKilled++;

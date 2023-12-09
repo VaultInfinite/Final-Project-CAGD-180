@@ -1,12 +1,13 @@
 /*
  * Salmoria, Wyatt & Aquino, Vicky
- * 12/6/23
+ * 12/8/23
  * This script allows the enemies to spawn around the player outside of the player's view.
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawnScript : MonoBehaviour
 {
@@ -22,17 +23,27 @@ public class EnemySpawnScript : MonoBehaviour
     //Designation for the Boss enemy that will appear on the second level after reaching a certain score.
     public GameObject enemyBoss;
 
+    private GameObject bossSpawn;
+    
     //Designation for the enemy spawning boolean that determines whether or not enemies will spawn.
     private bool enemySpawns = false;
 
     //Amount that the spawn enemies script will wait for; Will be changed through coins acquisition through 60 / spawntime = seconds.
     private float spawntime = 15f;
 
+    public int enemySpawnCount = 4;
+
     //Designation for damage; allows damage of enemies to be changed in this script later through coins acquisition.
     public int damage;
     //Designation for speed; allows speed of enemies to be changed in this script later through coins acquisition.
     public float speed;
+    //Designation for health; allows health of enemies to be changed in this script later throguh coins acquisition.
+    public int health;
 
+    //Checks to see if the boss should spawn; changed by coinsScript.
+    public bool bossSpawning = false;
+    //Checks to see if the boss has spawned; used to check if the boss has become null/defeated to end the game.
+    public bool bossSpawned = false;
     void Start()
     {
         StartCoroutine(SpawnTime());
@@ -42,11 +53,18 @@ public class EnemySpawnScript : MonoBehaviour
     {
         if (enemySpawns == true)
         {
-            EnemySpawning();
-            EnemySpawning();
-            EnemySpawning();
-            EnemySpawning();
+            for (int i = 0; i < enemySpawnCount; i++)
+            {
+                EnemySpawning();
+            }
             StartCoroutine(SpawnTime());
+        }
+        if (bossSpawned == true)
+        {
+            if (bossSpawn == null)
+            {
+                SceneManager.LoadScene(5);
+            }
         }
     }
 
@@ -86,12 +104,21 @@ public class EnemySpawnScript : MonoBehaviour
         }
 
         //Multiplication of EnemyPos to take enemy off of player.
-        enemyPos *= 9.0f;
+        enemyPos *= 12.0f;
         //Spawning of Enemy alongside addition of enemyPosition.
         GameObject EnemySpawn = Instantiate(Enemy, transform.position + enemyPos, transform.rotation);
         EnemySpawn.GetComponent<EnemyController>().player = player;
         EnemySpawn.GetComponent<EnemyController>().speed = speed;
         EnemySpawn.GetComponent<EnemyController>().damage = damage;
+        EnemySpawn.GetComponent<EnemyController>().health = health;
+        //Spawning of the boss as well as utilization of enemyPosition.
+        if (bossSpawning == true)
+        {
+            bossSpawning = false;
+            bossSpawned = true;
+            bossSpawn = Instantiate(enemyBoss, transform.position + enemyPos, transform.rotation);
+            bossSpawn.GetComponent<EnemyController>().player = player;
+        }
     }
     //Ienumerator for the spawntime of enemies; decides how often enemies will spawn.
     IEnumerator SpawnTime()

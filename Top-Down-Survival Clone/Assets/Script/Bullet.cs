@@ -1,6 +1,6 @@
 /*
  * Salmoria, Wyatt & Aquino, Vicky
- * 11/30/23
+ * 12/8/23
  * This script controls the bullet movement and overall properties of the bullet.
  */
 using System.Collections;
@@ -20,8 +20,7 @@ public class Bullet : MonoBehaviour
         // if the bullet hits an enemy call the killEnemy function from said enemy and then destroy it.
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyController>().KillEnemy();
-            Destroy(gameObject);
+            other.gameObject.GetComponent<EnemyController>().DamageEnemy(damage);
         }
     }
     private void Start()
